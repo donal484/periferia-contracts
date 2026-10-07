@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro de contratos · Periferia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  </head>
+  <body>
+    <header class="barra">
+      <div>
+        <h1>Registro de contratos</h1>
+        <p id="estado" class="estado">Conectando…</p>
+      </div>
+      <div class="acciones">
+        <button type="button" id="ver-reporte" class="secundario">Ver reporte</button>
+        <button type="button" id="nueva" class="secundario">Nueva conversación</button>
+        <button type="button" id="reset" class="secundario">Reiniciar demo</button>
+      </div>
+    </header>
+
+    <main id="chat" class="chat" aria-live="polite">
+      <section id="vacio" class="vacio">
+        <p>Procesa el buzón de contratos y revisa lo que quede pendiente.</p>
+        <button type="button" class="sugerencia" data-texto="Procesa el buzón de contratos con fecha de hoy 2026-09-03. Registra lo que esté limpio, muéstrame lo que requiere revisión campo por campo y termina con el reporte de alertas. No registres nada dudoso sin preguntarme.">
+          Procesar el buzón con fecha 2026-09-03
+        </button>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <section id="confirmar" class="confirmar" hidden>
+        <h2>Esperando tu confirmación</h2>
+        <ul id="pendientes"></ul>
+        <div class="confirmar-acciones">
+          <button type="button" id="btn-confirmar">Confirmar valores propuestos</button>
+          <span>o escribe las correcciones abajo.</span>
+        </div>
+      </section>
+      <form id="form" class="composer">
+        <label for="input" class="oculto">Mensaje para el agente</label>
+        <textarea id="input" rows="2" placeholder="Escribe un mensaje para el agente"></textarea>
+        <button type="submit" id="send">Enviar</button>
+      </form>
+    </footer>
+    <dialog id="reporte" class="reporte" aria-labelledby="reporte-titulo">
+      <header>
+        <h2 id="reporte-titulo">Reporte de contratos</h2>
+        <form id="form-reporte" class="reporte-fecha">
+          <label for="hoy">Fecha de referencia</label>
+          <input type="date" id="hoy" value="2026-09-03" required />
+          <button type="submit">Actualizar alertas</button>
+        </form>
+        <button type="button" id="cerrar-reporte" class="secundario" aria-label="Cerrar">Cerrar</button>
+      </header>
+      <nav class="pestanas" role="tablist">
+        <button type="button" role="tab" data-pestana="alertas" aria-selected="true">Alertas</button>
+        <button type="button" role="tab" data-pestana="maestro" aria-selected="false">Maestro</button>
+        <button type="button" role="tab" data-pestana="acuses" aria-selected="false">Acuses a comerciales</button>
+      </nav>
+      <section id="pestana-alertas" class="pestana"></section>
+      <section id="pestana-maestro" class="pestana" hidden></section>
+      <section id="pestana-acuses" class="pestana" hidden></section>
+    </dialog>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
