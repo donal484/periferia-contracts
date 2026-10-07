@@ -58,7 +58,8 @@ Separación pedida en el PRD:
 - **Proveedor usado:** Google Gemini (`gemini-2.5-flash`) a través de su API compatible con OpenAI, por su capa gratuita. También están implementados OpenAI y Anthropic (`LLM_PROVIDER`). Cambiar de proveedor no toca el ciclo: todos implementan `LlmAdapter.enviar(mensajes, herramientas)`.
 - **Nota sobre la capa gratuita:** Google puede usar los datos enviados para mejorar sus modelos; aceptable aquí porque los fixtures son ficticios, no para contratos reales.
 - **Por qué un modelo pequeño:** el modelo solo orquesta y redacta. La extracción, la clasificación y la escritura son deterministas, así que no se necesita un modelo grande para acertar los valores.
-- ⚠️ **Costo por caso:** cada respuesta de `/api/chat` trae `usage` (tokens de entrada y salida del turno). Costo por caso ≈ tokens del turno de "procesa el buzón" ÷ 6 mensajes × precio por token del modelo. Completar con la cifra medida en el despliegue.
+- **Costo por caso (medido):** el turno "procesa el buzón" (6 mensajes, con alertas) consumió 26.054 tokens de entrada y 1.456 de salida, unos 4.600 tokens por caso. Con precios de capa pagada de gemini-2.5-flash (US$0,30 / US$2,50 por millón de tokens de entrada / salida): ≈ US$0,002 por caso limpio. Un caso que requiere confirmación suma un turno de ≈ 25.700 tokens: ≈ US$0,011 en total. Con gemini-2.5-flash-lite baja a ≈ US$0,0005 y ≈ US$0,003. En la capa gratuita usada para el reto el costo es US$0.
+- **De dónde sale el costo:** más del 90 % son tokens de entrada, porque en cada paso se reenvían el prompt, el conocimiento, los esquemas de las 7 herramientas y el historial. El modelo no lee los contratos (la extracción es determinista), por eso el costo no crece con el largo del documento. Palanca para producción: caché de contexto para el prompt y las herramientas, que en Gemini cobra la entrada en caché a una décima parte del precio normal.
 
 ## 5. Estrategia de extracción
 

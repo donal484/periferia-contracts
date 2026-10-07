@@ -12,8 +12,10 @@ Agente conversacional que procesa el buzón único de contratos de Periferia: cl
 | "La póliza de CT-2026-015 ya la expidió Seguros X, número 123" | `actualizar_poliza` (pide confirmación) |
 | Botón "Ver reporte" | Alertas, maestro y acuses a comerciales, sin usar el modelo |
 
-**Link de prueba:** `https://<tu-servicio>.onrender.com` ← completar tras el despliegue
-**Clave de acceso:** si se configuró `ACCESS_KEY`, va aquí.
+**Link de prueba:** https://periferia-contracts.onrender.com
+**Clave de acceso:** `a6e0abe7153e1789c12f49364e37336e` (la interfaz la pide al enviar el primer mensaje)
+
+> El servicio usa el plan gratuito de Render: si estuvo inactivo, la primera carga tarda cerca de un minuto en despertar.
 
 ## Requisitos
 - [Bun](https://bun.sh) 1.1 o superior.
