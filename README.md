@@ -77,9 +77,4 @@ modulo/                          bonus: agente empaquetado (bun run build:modulo
 demo.ts                          verificación sin modelo
 ```
 
-## Despliegue (Render)
 
-1. Sube el repositorio a GitHub.
-2. En Render: New → Web Service → conecta el repo → Runtime **Docker** (usa el `Dockerfile`).
-3. En Environment agrega `OPENAI_API_KEY` (o `ANTHROPIC_API_KEY` + `LLM_PROVIDER=anthropic`) y, si quieres, `ACCESS_KEY`.
-4. Deploy. El plan gratuito se duerme tras inactividad: abre el link unos minutos antes de la defensa.
